@@ -1,38 +1,353 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rowdies:wght@300;400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rowdies", cursive;
+}
+
+body {
+  background: #0c0e0f;
+}
+
+/* BEGINNING OF THE LANDING PAGE */
+
+.landing-text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("./images/stars.png");
+  background-size: cover;
+}
+
+.landing-container h1 {
+  color: #fe3b1f;
+  font-size: 96px;
+  font-weight: 400;
+  margin: 120px 0 120px 0;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.landing-buttons button {
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.landing-buttons button:nth-child(1) {
+  margin-bottom: 25px;
+}
+
+.landing-buttons a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.start-button {
+  color: #ffffff;
+  background: #fe3b1f;
+  width: 395px;
+  height: 79px;
+  border-radius: 50px;
+  border: none;
+  font-size: 24px;
+  font-weight: 400;
+  transition: 0.3s ease-in-out;
+}
+
+.start-button:hover {
+  background: #c32e1a;
+}
+
+.submitted-button {
+  color: #ffffff;
+  background: none;
+  border: none;
+  font-size: 22px;
+  text-decoration-line: underline;
+  transition: 0.3s ease-in-out;
+}
+
+.submitted-button:hover {
+  color: #bfc2c2;
+}
+
+@keyframes astronautAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.rocketMan {
+  display: flex;
+  margin: 0 auto;
+  z-index: -99;
+  animation: astronautAnimation 4.5s infinite ease-in-out;
+}
+
+/* END OF THE LANDING PAGE */
+/* ----------------------------- */
+/* BEGINNING OF THE PERSONAL INFO PAGE */
+
+.PersonalPage {
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+}
+
+.form-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 131px 118px 0 105px;
+}
+
+.form-content h1 {
+  color: #fe3b1f;
+  font-weight: 400;
+  font-size: 64px;
+  margin-bottom: 125px;
+}
+
+.form-content form input {
+  display: block;
+  width: 455px;
+  height: 54px;
+  margin-bottom: 37px;
+
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 400;
+  color: #454545;
+  padding-left: 57px;
+}
+
+.form-content form input::placeholder {
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 400;
+  color: #454545;
+}
+
+.form-text {
+  background-color: #141719;
+  padding: 112px 114px 0 177px;
+}
+
+.form-text h1 {
+  color: #fe3b1f;
+  font-size: 64px;
+  font-weight: 400;
+  margin-bottom: 100px;
+}
+
+.form-text p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  line-height: 200%;
+  display: flex;
+  align-items: center;
+}
+
+/* END OF THE PERSONAL INFO PAGE */
+/* ----------------------------- */
+/* BEGINNING OF THE SKILLS PAGE */
+
+.SkillsPage {
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+}
+
+.SkillsPage form select {
+  width: 455px;
+  height: 54px;
+  margin-bottom: 37px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("./images/downArrow.png");
+  background-repeat: no-repeat;
+  background-position: top 24px right 22.98px;
+
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 400;
+  color: #454545;
+  padding-left: 57px;
+}
+
+.SkillsPage form button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #fe3b1f;
+  border: none;
+  width: 201px;
+  height: 32px;
+  float: right;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.SkillsPage form button:hover {
+  background-color: #c32e1a;
+}
+
+/* END OF THE SKILLS PAGE */
+/* ----------------------------- */
+/* BEGINNING OF COVID INFO PAGE */
+
+.CovidInfo {
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+}
+
+.radio-item {
+  display: flex;
+  margin: -10px 350px 0 0;
+}
+
+.CovidInfo h1 {
+  margin-bottom: 100px;
+}
+
+.CovidInfo .form-content p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.CovidInfo form input[type="radio"] {
+  width: 20px;
+  height: 12px;
+}
+
+.CovidInfo form label {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  white-space: nowrap;
+  line-height: 12px;
+}
+
+.question {
+  margin-bottom: 30px;
+}
+
+.question input[type="date"] {
+  margin-bottom: 60px;
+}
+
+/* END OF THE COVID INFO PAGE */
+/* ----------------------------- */
+/* BEGINNING OF INSIGHTS PAGE */
+
+.Insights {
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+}
+
+.question textarea {
+  resize: none;
+  margin-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  padding: 30px;
+}
+
+/* END OF THE INSIGHTS PAGE */
+/* ----------------------------- */
+/* BEGINNING OF THE SUBMIT PAGE */
+
+.submit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 18%;
+}
+
+.submit-container button {
+  font-family: "Montserrat", sans-serif;
+  border: none;
+  cursor: pointer;
+}
+
+.submitButton {
+  font-size: 36px;
   color: white;
+  background-color: #fe3b1f;
+  border-radius: 50px;
+  width: 395px;
+  height: 79px;
+  margin-bottom: 20px;
+  transition: 0.3s ease-in-out;
 }
 
-.App-link {
-  color: #61dafb;
+.submitButton:hover {
+  background: #c32e1a;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.backButton {
+  background: none;
+  font-size: 28px;
+  transition: 0.3s ease-in-out;
+}
+
+.submit-container a {
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  text-decoration-thickness: 1.5px;
+  transition: 0.3s ease-in-out;
+}
+
+.submit-container a:hover {
+  color: #bfc2c2;
+}
+
+.message {
+  text-align: center;
+  margin-top: 18%;
+}
+
+.sign-off {
+  font-family: "Rowdies", cursive;
+  font-size: 80px;
+  color: #fe3b1f;
+}
+
+/* END OF THE SUBMIT PAGE */
+/* ----------------------------- */
+/* BEGINNING OF CSS FOR VALIDATION ERRORS */
+
+.validateError {
+  position: absolute;
+  transform: translate(55px, -30px);
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  color: #fe3b1f;
 }
