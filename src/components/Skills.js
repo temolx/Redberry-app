@@ -1,26 +1,107 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom'
+import Remove from '../images/Remove.png'
 
 function Skills() {
+
+    const navigate = useNavigate();
+
+    const[skills, setSkills] = useState([]);
+    const[selectedSkills, setSelectedSkills] = useState([]);
+    const[selectedValue, setSelectedValue] = useState('');
+    const[experienceInput, setExperienceInput] = useState('');
+    const[errors, setErrors] = useState({
+        requirementError: '',
+    })
+
+    useEffect(() => {
+        axios.get(`https://bootcamp-2022.devtest.ge/api/skills`)
+            .then((res) => {
+                setSkills(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
+    
+    const handleSkillSubmit = () => {
+        const filteredSkills = skills.filter((element) => {
+            return element.title !== selectedValue
+        })
+        setSkills(filteredSkills)
+        setSelectedValue('')
+
+        if (selectedValue !== '' && experienceInput !== '') {
+            setSelectedSkills([...selectedSkills, {
+                title: selectedValue,
+                experience: experienceInput
+            }])
+            setErrors({
+                requirementError: ''
+            })
+        }
+    }
+
+    const handleDelete = (deleteSkill) => {
+        const filteredSkills = selectedSkills.filter((element) => {
+            return element.title !== deleteSkill.title
+        })
+
+        setSelectedSkills(filteredSkills)
+        setSkills([...skills, {
+            id: deleteSkill.id,
+            title: deleteSkill.title
+        }])
+    }
+
+    const handleNext = () => {
+        navigate(selectedSkills.length > 0 ? "/Covid" : "")
+
+        if (selectedSkills.length === 0) {
+            setErrors({
+                requirementError: 'You need to enter at least one skill'
+            })
+        }
+    }
+
     return (
         <div className="SkillsPage">
             <section className="form-content">
                 <h1>Tell us about your skills</h1>
 
-                <form>
-                    <select name="Skills" placeholder="Skills">
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
+                <form onSubmit={handleSubmit}>
+                    <select name="Skills" onChange={(e) => setSelectedValue(e.target.value)} >
+                        <option value="">Skills</option>
+                        {skills && skills.map((skill) => (
+                            <option value={skill.title} key={ skill.id }>{ skill.title }</option>
+                        ))}
                     </select>
 
-                    <input type="text" placeholder="Experience Duration in Years" />
-                    <button>Add Programming Language</button>
+                    <input type="text" placeholder="Experience Duration in Years" onChange={(e) => setExperienceInput(e.target.value)} />
+                    <button type="submit" onClick={() => handleSkillSubmit()}>Add Programming Language</button>
+                    <p className="skillValidation">{ errors.requirementError }</p>
                 </form>
+
+                <section className="selectedSkills">
+                    {selectedSkills && selectedSkills.map((selectedSkill) => ( //need key here
+                        <div className="skillList">
+                            <div className="skill-container">
+                                <p>{ selectedSkill.title }</p>
+                                <p>Years of experience: { selectedSkill.experience }</p>
+                                <button className="cancel-button" onClick={() => handleDelete(selectedSkill)}><img src={Remove} /></button>
+                            </div>
+                        </div>
+                    ))}
+                </section>
 
                 <nav>
                     <button><Link to="/Personal">Prev</Link></button>
-                    <button><Link to="/Covid">Next</Link></button>
+                    <button onClick={handleNext}>Next</button>
                 </nav>
             </section>
 
