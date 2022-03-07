@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Previous from '../images/Previous.png'
+import Next from '../images/Next.png'
+import Ellipse from '../images/Ellipse.png'
+import EllipseActive from '../images/EllipseActive.png'
 
 function PersonalInfo() {
 
@@ -68,6 +72,7 @@ function PersonalInfo() {
 
         else if (userInput.firstName.length >= 2 && userInput.lastName.length >= 2 && userInput.phoneNumber.includes('+995')) { // if the above errors are not detected
             setIsValid(true) // then our form is valid
+            navigate("/Skills") // and we can navigate to the next page
         }
     }
 
@@ -90,8 +95,13 @@ function PersonalInfo() {
                     <p className="validateError">{ userInput.phoneError }</p>
 
                     <nav>
-                        <button><Link to="/">Prev</Link></button>
-                        <button type="submit" onClick={() => navigate(isValid ? "/Skills" : "")}>Next</button> {/* navigates to next page if form is valid */}
+                        <button><Link to="/"><img src={Previous}/></Link></button>
+                            <img src={EllipseActive} />
+                            <img src={Ellipse} />
+                            <img src={Ellipse} />
+                            <img src={Ellipse} />
+                            <img src={Ellipse} />
+                        <button type="submit"><img src={Next}/></button> {/* navigates to next page if form is valid */}
                     </nav>
                 </form>
             </section>

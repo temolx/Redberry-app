@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import Next from '../images/Next.png'
+import Previous from '../images/Previous.png'
+import Ellipse from '../images/Ellipse.png'
+import EllipseActive from '../images/EllipseActive.png'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import Remove from '../images/Remove.png'
@@ -100,8 +104,13 @@ function Skills() {
                 </section>
 
                 <nav>
-                    <button><Link to="/Personal">Prev</Link></button>
-                    <button onClick={handleNext}>Next</button>
+                    <button><Link to="/Personal"><img src={Previous}/></Link></button>
+                        <img src={EllipseActive} />
+                        <img src={EllipseActive} />
+                        <img src={Ellipse} />
+                        <img src={Ellipse} />
+                        <img src={Ellipse} />
+                    <button onClick={handleNext}><img src={Next}/></button>
                 </nav>
             </section>
 

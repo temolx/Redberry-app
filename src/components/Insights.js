@@ -1,28 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Next from '../images/Next.png'
+import Previous from '../images/Previous.png'
+import Ellipse from '../images/Ellipse.png'
+import EllipseActive from '../images/EllipseActive.png'
 
 function Insights() {
 
     const navigate = useNavigate();
+    const checkRef = useRef();
 
     const[firstInput, setFirstInput] = useState('');
     const[secondInput, setSecondInput] = useState('');
     const[thirdInput, setThirdInput] = useState('');
 
-    const[firstError, setFirstError] = useState('')
+    const[firstError, setFirstError] = useState('') 
     const[secondError, setSecondError] = useState('')
     const[thirdError, setThirdError] = useState('')
 
     const handleNext = () => {
-        if (firstInput !== '' && secondInput !== '' && thirdInput !== '') {
-            navigate("/Submit")
+        if (firstInput !== '' && thirdInput !== '') {
+            if (checkRef.current.checked) {
+                if (secondInput !== '') {
+                    navigate("/Submit")
+                }
         }
+            else {
+                navigate("/Submit")
+            }
+    }
 
         if (firstInput === '') {
             setFirstError('This field is required')
         }
 
-        if (secondInput === '') {
+        if (checkRef.current.checked && secondInput === '') {
             setSecondError('This field is required too, buddy...')
         }
 
@@ -41,7 +53,7 @@ function Insights() {
                     <div className="question">
                         <p>Would you attend Devtalks and maybe also organize your own?</p>
                         <div className="radio-item">
-                            <input type="radio" id="dev-yes" name="dev" onChange={(e) => setFirstInput(e.target.value)} />
+                            <input ref={checkRef} type="radio" id="dev-yes" name="dev" onChange={(e) => setFirstInput(e.target.value)} />
                             <label htmlFor="dev-yes">Yes</label>
                         </div>
 
@@ -52,11 +64,11 @@ function Insights() {
                             <h3 className="covidValidation">{ firstError }</h3>
                     </div>
 
-                    <div className="question">
+                    {checkRef.current && checkRef.current.checked ? <div className="question">
                         <p>What would you speak about at Devtalk?</p>
                         <textarea onChange={(e) => setSecondInput(e.target.value)} name="" id="" cols="70" rows="6" placeholder="I would..."></textarea>
                         <h3 className="covidValidation">{ secondError }</h3>
-                    </div>
+                    </div> : <div></div>}
 
                     <div className="question">
                         <p>Tell us something special</p>
@@ -66,8 +78,13 @@ function Insights() {
                 </form>
 
                 <nav>
-                    <button><Link to="/Covid">Prev</Link></button>
-                    <button onClick={handleNext}>Next</button>
+                    <button><Link to="/Covid"><img src={Previous}/></Link></button>
+                        <img src={EllipseActive} />
+                        <img src={EllipseActive} />
+                        <img src={EllipseActive} />
+                        <img src={EllipseActive} />
+                        <img src={Ellipse} />
+                    <button onClick={handleNext}><img src={Next}/></button>
                 </nav>
             </section>
 

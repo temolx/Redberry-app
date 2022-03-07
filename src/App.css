@@ -102,7 +102,7 @@ body {
   background-color: #ffffff;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 100vh;
+  height: 100%;
 }
 
 .form-content {
@@ -164,8 +164,22 @@ body {
   align-items: center;
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin-bottom: 300px;
+}
+
 nav button {
-  margin-top: 85px;
+  margin-top: 90px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+nav img {
+  margin-right: 15px;
 }
 
 /* END OF THE PERSONAL INFO PAGE */
@@ -176,7 +190,7 @@ nav button {
   background-color: #ffffff;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 140vh;
+  height: 100%;
 }
 
 .SkillsPage form select {
@@ -253,7 +267,7 @@ nav button {
   background-color: #ffffff;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 130vh;
+  height: 100%;
 }
 
 .radio-item {
@@ -291,7 +305,13 @@ nav button {
 }
 
 .question input[type="date"] {
-  margin-bottom: 60px;
+  background: url("images/calendar.png") no-repeat;
+  background-position: 415px;
+}
+
+.question input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
 }
 
 /* END OF THE COVID INFO PAGE */
@@ -302,7 +322,7 @@ nav button {
   background-color: #ffffff;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 100vh;
+  height: 100%;
 }
 
 .question textarea {

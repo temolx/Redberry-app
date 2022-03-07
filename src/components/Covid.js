@@ -1,5 +1,9 @@
 import React, { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Next from '../images/Next.png'
+import Previous from '../images/Previous.png'
+import Ellipse from '../images/Ellipse.png'
+import EllipseActive from '../images/EllipseActive.png'
 
 function Covid() {
     const navigate = useNavigate();
@@ -10,13 +14,38 @@ function Covid() {
     const[covidOption, SetCovidOption] = useState('');
     const[vaccineOption, SetVaccineOption] = useState('');
 
-    const[workError, setWorkError] = useState('')
+    const[covidDate, setCovidDate] = useState('');
+    const[vaccineDate, setVaccineDate] = useState('');
+
+    const[workError, setWorkError] = useState('') // could make a state object for errors here 
     const[covidError, setCovidError] = useState('')
     const[vaccineError, setVaccineError] = useState('')
+    const[dateErrorCovid, setDateErrorCovid] = useState('')
+    const[dateErrorVaccine, setDateErrorVaccine] = useState('')
 
     const handleNext = () => {
         if (workOption !== '' && covidOption !== '' && vaccineOption !== '') {
-            navigate("/Insights")
+            if (checkRef.current.checked && vaccineRef.current.checked) {
+                if (covidDate !== '' && vaccineDate !== '') {
+                    navigate("/Insights")
+                }   
+            }
+
+            else if (checkRef.current.checked && !vaccineRef.current.checked) {
+                if (covidDate !== '') {
+                    navigate("/Insights")
+                }   
+            }
+
+            else if (!checkRef.current.checked && vaccineRef.current.checked) {
+                if (vaccineDate !== '') {
+                    navigate("/Insights")
+                }   
+            }
+            
+            else {
+                navigate("/Insights")
+            }
         }
         
         if (workOption === '') {
@@ -29,6 +58,14 @@ function Covid() {
 
         if (vaccineOption === '') {
             setVaccineError("Vaccine information is required")
+        }
+
+        if (dateErrorCovid === '') {
+            setDateErrorCovid("Date required")
+        }
+
+        if (dateErrorVaccine === '') {
+            setDateErrorVaccine("Date required")
         }
     }
 
@@ -72,9 +109,10 @@ function Covid() {
 
                     {checkRef.current && checkRef.current.checked ? <div className="question">
                         <p>When?</p>
-                        <input type="date" />
+                        <input type="date" onChange={(e) => setCovidDate(e.target.value)} />
+                        <h3 className="covidValidation">{ dateErrorCovid }</h3>
                         </div> : <div></div>}
-
+                    
                     <div className="question">
                         <p>Have you been vaccinated?</p>
                         <div className="radio-item">
@@ -91,13 +129,19 @@ function Covid() {
 
                     {vaccineRef.current && vaccineRef.current.checked ? <div className="question">
                         <p>When did you get your last covid vaccine?</p>
-                        <input type="date" />
+                        <input type="date" onChange={(e) => setVaccineDate(e.target.value)} />
+                        <h3 className="covidValidation">{ dateErrorVaccine }</h3>
                         </div> : <div></div>}
                 </form>
 
                 <nav>
-                    <button><Link to="/Skills">Prev</Link></button>
-                    <button onClick={handleNext}>Next</button>
+                    <button><Link to="/Skills"><img src={Previous}/></Link></button>
+                        <img src={EllipseActive} />
+                        <img src={EllipseActive} />
+                        <img src={EllipseActive} />
+                        <img src={Ellipse} />
+                        <img src={Ellipse} />
+                    <button onClick={handleNext}><img src={Next}/></button>
                 </nav>
             </section>
 
