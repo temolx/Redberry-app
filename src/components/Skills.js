@@ -7,7 +7,7 @@ import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import Remove from '../images/Remove.png'
 
-function Skills() {
+function Skills({ data, setData }) {
 
     const navigate = useNavigate();
 
@@ -64,6 +64,11 @@ function Skills() {
     }
 
     const handleNext = () => {
+        setData({
+            ...data,
+            skills: selectedSkills
+        })
+
         navigate(selectedSkills.length > 0 ? "/Covid" : "")
 
         if (selectedSkills.length === 0) {

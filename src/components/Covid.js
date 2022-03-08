@@ -1,13 +1,16 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Next from '../images/Next.png'
 import Previous from '../images/Previous.png'
 import Ellipse from '../images/Ellipse.png'
 import EllipseActive from '../images/EllipseActive.png'
 
-function Covid() {
+function Covid({ data, setData }) {
     const navigate = useNavigate();
-    const checkRef = useRef();
+
+    const workRef = useRef();
+    const workRefTwo = useRef();
+    const covidRef = useRef();
     const vaccineRef = useRef();
 
     const[workOption, setWorkOption] = useState('');
@@ -25,19 +28,29 @@ function Covid() {
 
     const handleNext = () => {
         if (workOption !== '' && covidOption !== '' && vaccineOption !== '') {
-            if (checkRef.current.checked && vaccineRef.current.checked) {
+            
+            setData({
+                ...data,
+                work_preference: workRef.current.checked ? "from_home" : workRefTwo.current.checked ? "from_office" : "hybrid",
+                had_covid: covidRef.current.checked ? true : false,
+                had_covid_at: "2022-02-23",
+                vaccinated: vaccineRef.current.checked ? true : false,
+                vaccinated_at: "2022-02-23",
+            })
+
+            if (covidRef.current.checked && vaccineRef.current.checked) {
                 if (covidDate !== '' && vaccineDate !== '') {
                     navigate("/Insights")
                 }   
             }
 
-            else if (checkRef.current.checked && !vaccineRef.current.checked) {
+            else if (covidRef.current.checked && !vaccineRef.current.checked) {
                 if (covidDate !== '') {
                     navigate("/Insights")
                 }   
             }
 
-            else if (!checkRef.current.checked && vaccineRef.current.checked) {
+            else if (!covidRef.current.checked && vaccineRef.current.checked) {
                 if (vaccineDate !== '') {
                     navigate("/Insights")
                 }   
@@ -77,12 +90,12 @@ function Covid() {
                     <div className="question">
                         <p>How would you prefer to work?</p>
                         <div className="radio-item">
-                            <input type="radio" id="sairme" name="work" onChange={(e) => setWorkOption(e.target.value)}/>
+                            <input ref={workRef} type="radio" id="sairme" name="work" value="From Sairme Offce" onChange={() => setWorkOption(workRef.current.value)}/>
                             <label htmlFor="sairme">From Sairme Offce</label>
                         </div>
 
                         <div className="radio-item">
-                            <input type="radio" id="home" name="work" onChange={(e) => setWorkOption(e.target.value)} />
+                            <input ref={workRefTwo} type="radio" id="home" name="work" onChange={(e) => setWorkOption(e.target.value)} />
                             <label htmlFor="home">From Home</label>
                         </div>
 
@@ -96,7 +109,7 @@ function Covid() {
                     <div className="question">
                         <p>Did you contract covid 19? :(</p>
                         <div className="radio-item">
-                            <input ref={checkRef} type="radio" id="covid-yes" name="covid" onChange={(e) => SetCovidOption(e.target.value)}/>
+                            <input ref={covidRef} type="radio" id="covid-yes" name="covid" onChange={(e) => SetCovidOption(e.target.value)}/>
                             <label htmlFor="covid-yes">Yes</label>
                         </div>
 
@@ -107,7 +120,7 @@ function Covid() {
                         <h3 className="covidValidation">{ covidError }</h3>
                     </div>
 
-                    {checkRef.current && checkRef.current.checked ? <div className="question">
+                    {covidRef.current && covidRef.current.checked ? <div className="question">
                         <p>When?</p>
                         <input type="date" onChange={(e) => setCovidDate(e.target.value)} />
                         <h3 className="covidValidation">{ dateErrorCovid }</h3>

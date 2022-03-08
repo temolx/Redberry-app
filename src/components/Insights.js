@@ -5,7 +5,7 @@ import Previous from '../images/Previous.png'
 import Ellipse from '../images/Ellipse.png'
 import EllipseActive from '../images/EllipseActive.png'
 
-function Insights() {
+function Insights({ data, setData }) {
 
     const navigate = useNavigate();
     const checkRef = useRef();
@@ -20,6 +20,14 @@ function Insights() {
 
     const handleNext = () => {
         if (firstInput !== '' && thirdInput !== '') {
+
+            setData({
+                ...data,
+                will_organize_devtalk: checkRef.current.checked ? true : false,
+                devtalk_topic: secondInput,
+                something_special: thirdInput
+            })
+
             if (checkRef.current.checked) {
                 if (secondInput !== '') {
                     navigate("/Submit")

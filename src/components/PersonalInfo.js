@@ -1,19 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Previous from '../images/Previous.png'
 import Next from '../images/Next.png'
 import Ellipse from '../images/Ellipse.png'
 import EllipseActive from '../images/EllipseActive.png'
 
-function PersonalInfo() {
+function PersonalInfo({ data, setData }) {
 
     const navigate = useNavigate();
 
-    const[userInput, setUserInput] = useState({ // creating state for storing errors (for form validation)
+    const[userInput, setUserInput] = useState({ // creating state for storing variables and errors (for form validation)
         firstName: '',
         lastName: '',
         mail: '',
         phoneNumber: '',
+
         firstError: '',
         lastError: '',
         mailError: '',
@@ -34,6 +35,13 @@ function PersonalInfo() {
         setUserInput({
             ...userInput,
             lastName: e.target.value
+        })
+    }
+
+    const handleMail = (e) => { // sets user input to email property
+        setUserInput({
+            ...userInput,
+            mail: e.target.value
         })
     }
 
@@ -72,7 +80,15 @@ function PersonalInfo() {
 
         else if (userInput.firstName.length >= 2 && userInput.lastName.length >= 2 && userInput.phoneNumber.includes('+995')) { // if the above errors are not detected
             setIsValid(true) // then our form is valid
+            setData({
+                ...data,
+                first_name: userInput.firstName,
+                last_name: userInput.lastName,
+                email: userInput.mail,
+                phone: userInput.phoneNumber,
+            })
             navigate("/Skills") // and we can navigate to the next page
+            
         }
     }
 
@@ -88,7 +104,7 @@ function PersonalInfo() {
                     <input type="text" placeholder="Last Name" onChange={(e) => handleSecond(e)} required />
                     <p className="validateError">{ userInput.lastError }</p>
 
-                    <input type="email" placeholder="E Mail" required />
+                    <input type="email" placeholder="E Mail" required onChange={(e) => handleMail(e)} />
                     <p className="validateError">{ userInput.mailError }</p>
 
                     <input type="tel" placeholder="+995 5__ __ __" onChange={(e) => handlePhone(e)} required />
