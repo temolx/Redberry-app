@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import LandingPage from './components/LandingPage';
 import PersonalInfo from './components/PersonalInfo';
 import Skills from './components/Skills';
@@ -32,18 +32,18 @@ function App() {
   });
 
   return (
-    <Router basename="/Reberry-app">
+    <Router>
       <div className="App">
 
-        <Routes>
-          <Route path="/Redberry-app" element={<LandingPage />} />
-          <Route path="/Personal/Redberry-app" element={<PersonalInfo data={data} setData={setData} />} />
-          <Route path="/Skills/Redberry-app" element={<Skills data={data} setData={setData} />} />
-          <Route path="/Covid/Redberry-app" element={<Covid data={data} setData={setData} />} />
-          <Route path="/Insights/Redberry-app" element={<Insights data={data} setData={setData} />} />
-          <Route path="/Submit/Redberry-app" element={<Submit data={data} setData={setData} />} />
-          <Route path="/Applications/Redberry-app" element={<Applications />} />
-        </Routes>
+        <HashRouter>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/Personal" element={<PersonalInfo data={data} setData={setData} />} />
+          <Route path="/Skills" element={<Skills data={data} setData={setData} />} />
+          <Route path="/Covid" element={<Covid data={data} setData={setData} />} />
+          <Route path="/Insights" element={<Insights data={data} setData={setData} />} />
+          <Route path="/Submit" element={<Submit data={data} setData={setData} />} />
+          <Route path="/Applications" element={<Applications />} />
+        </HashRouter>
         
       </div>
     </Router>
