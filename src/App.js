@@ -36,13 +36,13 @@ function App() {
       <div className="App">
 
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/Personal" element={<PersonalInfo data={data} setData={setData} />} />
-          <Route path="/Skills" element={<Skills data={data} setData={setData} />} />
-          <Route path="/Covid" element={<Covid data={data} setData={setData} />} />
-          <Route path="/Insights" element={<Insights data={data} setData={setData} />} />
-          <Route path="/Submit" element={<Submit data={data} setData={setData} />} />
-          <Route path="/Applications" element={<Applications />} />
+          <Route path="#/" element={<LandingPage />} />
+          <Route path="#/Personal" element={<PersonalInfo data={data} setData={setData} />} />
+          <Route path="#/Skills" element={<Skills data={data} setData={setData} />} />
+          <Route path="#/Covid" element={<Covid data={data} setData={setData} />} />
+          <Route path="#/Insights" element={<Insights data={data} setData={setData} />} />
+          <Route path="#/Submit" element={<Submit data={data} setData={setData} />} />
+          <Route path="#/Applications" element={<Applications />} />
         </Routes>
         
       </div>
