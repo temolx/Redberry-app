@@ -36,13 +36,13 @@ function App() {
       <div className="App">
 
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/Personal" element={<PersonalInfo data={data} setData={setData} />} />
-          <Route path="/Skills" element={<Skills data={data} setData={setData} />} />
-          <Route path="/Covid" element={<Covid data={data} setData={setData} />} />
-          <Route path="/Insights" element={<Insights data={data} setData={setData} />} />
-          <Route path="/Submit" element={<Submit data={data} setData={setData} />} />
-          <Route path="/Applications" element={<Applications />} />
+          <Route path="/Redberry-app" element={<LandingPage />} />
+          <Route path="/Personal/Redberry-app" element={<PersonalInfo data={data} setData={setData} />} />
+          <Route path="/Skills/Redberry-app" element={<Skills data={data} setData={setData} />} />
+          <Route path="/Covid/Redberry-app" element={<Covid data={data} setData={setData} />} />
+          <Route path="/Insights/Redberry-app" element={<Insights data={data} setData={setData} />} />
+          <Route path="/Submit/Redberry-app" element={<Submit data={data} setData={setData} />} />
+          <Route path="/Applications/Redberry-app" element={<Applications />} />
         </Routes>
         
       </div>
