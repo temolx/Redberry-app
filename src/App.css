@@ -168,7 +168,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: baseline;
-  margin-bottom: 300px;
+  margin-bottom: 420px;
 }
 
 nav button {
@@ -307,6 +307,7 @@ nav img {
 .question input[type="date"] {
   background: url("images/calendar.png") no-repeat;
   background-position: 415px;
+  border: 1px solid #525557;
 }
 
 .question input[type="date"]::-webkit-calendar-picker-indicator {
@@ -384,7 +385,7 @@ nav img {
 
 .message {
   text-align: center;
-  margin-top: 18%;
+  margin-top: 20%;
 }
 
 .sign-off {
@@ -420,4 +421,119 @@ nav img {
   font-size: 12px;
   font-weight: 500;
   color: #fe3b1f;
+}
+
+/* END OF CSS FOR VALIDATION */
+/* ----------------------------- */
+/* BEGINNING OF CSS FOR APPLICATIONS PAGE */
+
+.applications {
+  padding: 10vh 30vh;
+}
+
+.submitted-header {
+  font-family: "Rowdies", cursive;
+  font-size: 56px;
+  color: white;
+  margin-bottom: 55px;
+}
+
+.applications-list {
+  background-color: white;
+  padding: 40px 110px 0 110px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+.applications-list-container h1 {
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 18px;
+  color: #fe3b1f;
+  text-decoration: underline;
+  margin-bottom: 44px;
+}
+
+.applications h3 {
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 300;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+.applications span {
+  margin-left: 40px;
+  font-weight: 100;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.red-header {
+  background-color: #fe3b1f;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.red-header:hover {
+  background-color: #f05039;
+}
+
+.red-header button {
+  background: none;
+  border: none;
+  float: right;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.info {
+  margin-bottom: 100px;
+}
+
+.info label {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  margin: 0 0 25px 10px;
+  font-size: 14px;
+}
+
+.info p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  margin-bottom: 30px;
+  font-size: 17px;
+}
+
+.dateInput-submission input {
+  font-family: "Montserrat", sans-serif;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 400;
+  color: #454545;
+  margin-bottom: 80px;
+}
+
+.applications input[type="date"] {
+  padding: 14px 40px;
+  width: 320px;
+  background: url("images/calendar.png") no-repeat;
+  background-position: 275px;
+  background-color: #fefcfc;
+  border: 1px solid #525557;
+}
+
+.applications input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.applications .radio-item {
+  margin-bottom: 10px;
 }

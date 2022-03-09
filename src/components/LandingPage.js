@@ -10,7 +10,7 @@ function LandingPage() {
 
                 <div className="landing-buttons">
                     <button className="start-button"><Link to="/Personal">Start Questionnaire</Link></button>
-                    <button className="submitted-button"><a>Submitted Applications</a></button>
+                    <button className="submitted-button"><Link to="Applications">Submitted Applications</Link></button>
                 </div>
                 
                 <img src={rocketman} alt="image of an astronaut" className="rocketMan" />

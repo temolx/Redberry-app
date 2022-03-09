@@ -7,6 +7,7 @@ import Skills from './components/Skills';
 import Covid from './components/Covid';
 import Insights from './components/Insights';
 import Submit from './components/Submit';
+import Applications from './components/Applications';
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/Covid" element={<Covid data={data} setData={setData} />} />
           <Route path="/Insights" element={<Insights data={data} setData={setData} />} />
           <Route path="/Submit" element={<Submit data={data} setData={setData} />} />
+          <Route path="/Applications" element={<Applications />} />
         </Routes>
         
       </div>
