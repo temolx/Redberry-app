@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Next from '../images/Next.png'
 import Previous from '../images/Previous.png'
@@ -8,28 +8,28 @@ import EllipseActive from '../images/EllipseActive.png'
 function Insights({ data, setData }) {
 
     const navigate = useNavigate();
+    
     const checkRef = useRef();
+    const devRef = useRef();
 
-    const[firstInput, setFirstInput] = useState('');
-    const[secondInput, setSecondInput] = useState('');
-    const[thirdInput, setThirdInput] = useState('');
+    const[firstInput, setFirstInput] = useState();
 
     const[firstError, setFirstError] = useState('') 
     const[secondError, setSecondError] = useState('')
     const[thirdError, setThirdError] = useState('')
 
+
     const handleNext = () => {
-        if (firstInput !== '' && thirdInput !== '') {
+        if (firstInput !== '' && data.something_special !== '') {
 
             setData({
                 ...data,
                 will_organize_devtalk: checkRef.current.checked ? true : false,
-                devtalk_topic: secondInput,
-                something_special: thirdInput
+                devtalk_topic: checkRef.current.checked ? devRef.current.value : "Not applicable"
             })
 
             if (checkRef.current.checked) {
-                if (secondInput !== '') {
+                if (data.devtalk_topic !== '') {
                     navigate("/Submit")
                 }
         }
@@ -42,11 +42,11 @@ function Insights({ data, setData }) {
             setFirstError('This field is required')
         }
 
-        if (checkRef.current.checked && secondInput === '') {
+        if (checkRef.current.checked && data.devtalk_topic === '') {
             setSecondError('This field is required too, buddy...')
         }
 
-        if (thirdInput === '') {
+        if (data.something_special === '') {
             setThirdError("You're done...")
         }
     }
@@ -74,13 +74,13 @@ function Insights({ data, setData }) {
 
                     {checkRef.current && checkRef.current.checked ? <div className="question">
                         <p>What would you speak about at Devtalk?</p>
-                        <textarea onChange={(e) => setSecondInput(e.target.value)} name="" id="" cols="70" rows="6" placeholder="I would..."></textarea>
+                        <textarea ref={devRef} value={data.devtalk_topic} onChange={(e) => setData({...data, devtalk_topic: e.target.value})} name="" id="" cols="70" rows="6" placeholder="I would..."></textarea>
                         <h3 className="covidValidation">{ secondError }</h3>
                     </div> : <div></div>}
 
                     <div className="question">
                         <p>Tell us something special</p>
-                        <textarea onChange={(e) => setThirdInput(e.target.value)} name="" id="" cols="70" rows="5" placeholder="I..."></textarea>
+                        <textarea value={data.something_special} onChange={(e) => setData({...data, something_special: e.target.value})} name="" id="" cols="70" rows="5" placeholder="I..."></textarea>
                         <h3 className="covidValidation">{ thirdError }</h3>
                     </div>
                 </form>

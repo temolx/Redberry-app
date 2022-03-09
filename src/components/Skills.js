@@ -12,15 +12,16 @@ function Skills({ data, setData }) {
     const navigate = useNavigate();
 
     const[skills, setSkills] = useState([]);
-    const[selectedSkills, setSelectedSkills] = useState([]);
+    const[selectedSkills, setSelectedSkills] = useState(''); // where our selected values are stores
     const[selectedValue, setSelectedValue] = useState('');
+    
     const[experienceInput, setExperienceInput] = useState('');
     const[errors, setErrors] = useState({
         requirementError: '',
     })
 
     useEffect(() => {
-        axios.get(`https://bootcamp-2022.devtest.ge/api/skills`)
+        axios.get(`https://bootcamp-2022.devtest.ge/api/skills`) // API call for skills
             .then((res) => {
                 setSkills(res.data)
             })
@@ -34,13 +35,13 @@ function Skills({ data, setData }) {
     }
     
     const handleSkillSubmit = () => {
-        const filteredSkills = skills.filter((element) => {
+        const filteredSkills = skills.filter((element) => { // removing submitted skill from the list
             return element.title !== selectedValue
         })
         setSkills(filteredSkills)
         setSelectedValue('')
 
-        if (selectedValue !== '' && experienceInput !== '') {
+        if (selectedValue !== '' && experienceInput !== '') { // adding the selected skill to our selectedSkills state
             setSelectedSkills([...selectedSkills, {
                 title: selectedValue,
                 experience: experienceInput
@@ -52,11 +53,11 @@ function Skills({ data, setData }) {
     }
 
     const handleDelete = (deleteSkill) => {
-        const filteredSkills = selectedSkills.filter((element) => {
+        const filteredSkills = selectedSkills.filter((element) => { // version of the skills state that doesn't include our selected skill
             return element.title !== deleteSkill.title
         })
 
-        setSelectedSkills(filteredSkills)
+        setSelectedSkills(filteredSkills) // we see set the above filtered state to the main skills state
         setSkills([...skills, {
             id: deleteSkill.id,
             title: deleteSkill.title
@@ -66,12 +67,12 @@ function Skills({ data, setData }) {
     const handleNext = () => {
         setData({
             ...data,
-            skills: selectedSkills
+            skills: selectedSkills // we set our selected skills to the main data state that will later be submitted
         })
 
-        navigate(selectedSkills.length > 0 ? "/Covid" : "")
+        navigate(selectedSkills.length > 0 ? "/Covid" : "") // if we have at least 1 skill, we can move forward
 
-        if (selectedSkills.length === 0) {
+        if (selectedSkills.length === 0) { // throws user an error if they haven't selected a skill
             setErrors({
                 requirementError: 'You need to enter at least one skill'
             })
@@ -97,8 +98,8 @@ function Skills({ data, setData }) {
                 </form>
 
                 <section className="selectedSkills">
-                    {selectedSkills && selectedSkills.map((selectedSkill) => ( //need key here
-                        <div className="skillList">
+                    {selectedSkills && selectedSkills.map((selectedSkill, index) => ( // need key here
+                        <div className="skillList" key={index}>
                             <div className="skill-container">
                                 <p>{ selectedSkill.title }</p>
                                 <p>Years of experience: { selectedSkill.experience }</p>

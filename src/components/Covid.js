@@ -8,50 +8,49 @@ import EllipseActive from '../images/EllipseActive.png'
 function Covid({ data, setData }) {
     const navigate = useNavigate();
 
-    const workRef = useRef();
+    const workRef = useRef(); // using refs to see if radios are checked or not
     const workRefTwo = useRef();
     const covidRef = useRef();
     const vaccineRef = useRef();
 
-    const[workOption, setWorkOption] = useState('');
+    const[workOption, setWorkOption] = useState({
+        value: '',
+        status: false,
+    });
     const[covidOption, SetCovidOption] = useState('');
     const[vaccineOption, SetVaccineOption] = useState('');
 
-    const[covidDate, setCovidDate] = useState('');
-    const[vaccineDate, setVaccineDate] = useState('');
-
-    const[workError, setWorkError] = useState('') // could make a state object for errors here 
-    const[covidError, setCovidError] = useState('')
+    const[workError, setWorkError] = useState('') // could make an object for errors here 
+    const[covidError, setCovidError] = useState('') 
     const[vaccineError, setVaccineError] = useState('')
     const[dateErrorCovid, setDateErrorCovid] = useState('')
     const[dateErrorVaccine, setDateErrorVaccine] = useState('')
 
     const handleNext = () => {
-        if (workOption !== '' && covidOption !== '' && vaccineOption !== '') {
+
+        if (workOption !== '' && covidOption !== '' && vaccineOption !== '') { // checking if user selected any of the options
             
             setData({
                 ...data,
                 work_preference: workRef.current.checked ? "from_home" : workRefTwo.current.checked ? "from_office" : "hybrid",
                 had_covid: covidRef.current.checked ? true : false,
-                had_covid_at: "2022-02-23",
                 vaccinated: vaccineRef.current.checked ? true : false,
-                vaccinated_at: "2022-02-23",
             })
 
-            if (covidRef.current.checked && vaccineRef.current.checked) {
-                if (covidDate !== '' && vaccineDate !== '') {
+            if (covidRef.current.checked && vaccineRef.current.checked) { // cases when user can navigate to the next page
+                if (data.had_covid_at !== '' && data.vaccinated_at !== '') {
                     navigate("/Insights")
                 }   
             }
 
             else if (covidRef.current.checked && !vaccineRef.current.checked) {
-                if (covidDate !== '') {
+                if (data.had_covid_at !== '') {
                     navigate("/Insights")
                 }   
             }
 
             else if (!covidRef.current.checked && vaccineRef.current.checked) {
-                if (vaccineDate !== '') {
+                if (data.vaccinated_at !== '') {
                     navigate("/Insights")
                 }   
             }
@@ -61,7 +60,7 @@ function Covid({ data, setData }) {
             }
         }
         
-        if (workOption === '') {
+        if (workOption === '') { // setting errors
             setWorkError("Your work preference is required")
         }
 
@@ -90,17 +89,17 @@ function Covid({ data, setData }) {
                     <div className="question">
                         <p>How would you prefer to work?</p>
                         <div className="radio-item">
-                            <input ref={workRef} type="radio" id="sairme" name="work" value="From Sairme Offce" onChange={() => setWorkOption(workRef.current.value)}/>
+                            <input ref={workRef} type="radio" id="sairme" name="work" value="From Sairme Office" onChange={() => setWorkOption({...workOption, value: workRef.current.value})}/>
                             <label htmlFor="sairme">From Sairme Offce</label>
                         </div>
 
                         <div className="radio-item">
-                            <input ref={workRefTwo} type="radio" id="home" name="work" onChange={(e) => setWorkOption(e.target.value)} />
+                            <input ref={workRefTwo} type="radio" id="home" name="work" value="From Home" onChange={() => setWorkOption({...workOption, value: workRefTwo.current.value})} />
                             <label htmlFor="home">From Home</label>
                         </div>
 
                         <div className="radio-item">
-                            <input type="radio" id="hybrid" name="work" onChange={(e) => setWorkOption(e.target.value)} />
+                            <input type="radio" id="hybrid" name="work" value="Hybrid" onChange={(e) => setWorkOption({...workOption, value: e.target.value})} />
                             <label htmlFor="hybrid">Hybrid</label>
                         </div>
                         <h3 className="covidValidation">{ workError }</h3>
@@ -122,7 +121,7 @@ function Covid({ data, setData }) {
 
                     {covidRef.current && covidRef.current.checked ? <div className="question">
                         <p>When?</p>
-                        <input type="date" onChange={(e) => setCovidDate(e.target.value)} />
+                        <input type="date" value={data.had_covid_at} onChange={(e) => setData({...data, had_covid_at: covidRef.current.checked ? e.target.value : "2000-01-01"})} />
                         <h3 className="covidValidation">{ dateErrorCovid }</h3>
                         </div> : <div></div>}
                     
@@ -142,7 +141,7 @@ function Covid({ data, setData }) {
 
                     {vaccineRef.current && vaccineRef.current.checked ? <div className="question">
                         <p>When did you get your last covid vaccine?</p>
-                        <input type="date" onChange={(e) => setVaccineDate(e.target.value)} />
+                        <input value={data.vaccinated_at} type="date" onChange={(e) => setData({...data, vaccinated_at: vaccineRef.current.checked ? e.target.value : "2000-01-01"})} />
                         <h3 className="covidValidation">{ dateErrorVaccine }</h3>
                         </div> : <div></div>}
                 </form>

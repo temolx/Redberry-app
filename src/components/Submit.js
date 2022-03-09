@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 function Submit({ data, setData }) {
 
+    const navigate = useNavigate();
+
     const[submitted, setSubmitted] = useState(false);
+    const[redirect, setRedirect] = useState(false);
 
     const handleSubmit = () => {
         setSubmitted(true);
-
         console.log(data)
 
-        axios.post("https://bootcamp-2022.devtest.ge/api/application", {
+        axios.post("https://bootcamp-2022.devtest.ge/api/application", { // posting into the API
             token: data.token,
             first_name: data.first_name,
             last_name: data.last_name,
@@ -41,12 +43,18 @@ function Submit({ data, setData }) {
         })
     }
 
+    useEffect(() => {
+        setTimeout(() => { // redirect states becomes true after 3 secs and we navigate to the landing page once again
+            setRedirect(true)
+        }, 3000)
+    }, [submitted])
+
     if (submitted) {
-        return (
-            <div className="message">
-                <h1 className="sign-off">Thanks for Joining 😊</h1>
-            </div>
-        )
+            return (
+                <div className="message">
+                    {!redirect ? <h1 className="sign-off">Thanks for Joining 😊</h1> : navigate("/")}
+                 </div>
+            )
     }
 
     else {

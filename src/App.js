@@ -22,9 +22,9 @@ function App() {
 
       work_preference: "",
       had_covid: false,
-      had_covid_at: "",
+      had_covid_at: "2000-01-01",
       vaccinated: false,
-      vaccinated_at: "",
+      vaccinated_at: "2000-01-01",
 
       will_organize_devtalk: false,
       devtalk_topic: "",

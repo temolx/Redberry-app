@@ -10,45 +10,39 @@ function PersonalInfo({ data, setData }) {
     const navigate = useNavigate();
 
     const[userInput, setUserInput] = useState({ // creating state for storing variables and errors (for form validation)
-        firstName: '',
-        lastName: '',
-        mail: '',
-        phoneNumber: '',
-
         firstError: '',
         lastError: '',
         mailError: '',
         phoneError: ''
     });
-    const[isValid, setIsValid] = useState(false); // keeps track of validation status
 
 
 
     const handleFirst = (e) => { // sets user input to first name property
-        setUserInput({
-            ...userInput,
-            firstName: e.target.value
+        setData({
+            ...data,
+            first_name: e.target.value
         })
     }
 
     const handleSecond = (e) => { // sets user input to last name property
-        setUserInput({
-            ...userInput,
-            lastName: e.target.value
+        setData({
+            ...data,
+            last_name: e.target.value
         })
     }
 
     const handleMail = (e) => { // sets user input to email property
-        setUserInput({
-            ...userInput,
-            mail: e.target.value
+        setData({
+            ...data,
+            email: e.target.value
         })
     }
 
     const handlePhone = (e) => { // sets user input to phone # property
-        setUserInput({
-            ...userInput,
-            phoneNumber: e.target.value
+        setData({
+            ...data,
+            phone: e.target.value
         })
     }
 
@@ -57,36 +51,28 @@ function PersonalInfo({ data, setData }) {
     const validateForm = (e) => { // Validation
         e.preventDefault()
 
-        if (userInput.firstName.length < 2) { // first name must be 2 letters long min
+        if (data.first_name.length < 2) { // first name must be 2 letters long min
             setUserInput({
                 ...userInput,
                 firstError: '* first name should include 2 or more characters' // if not we display an error
             })
         }
 
-        if (userInput.lastName.length < 2) {
+        if (data.last_name.length < 2) {
             setUserInput({
                 ...userInput,
                 lastError: '* last name should include 2 or more characters'
             })
         }
 
-        if (!userInput.phoneNumber.includes('+995')) { // phone # must include Georgian country code
+        if (!data.phone.includes('+995')) { // phone # must include Georgian country code
             setUserInput({
                 ...userInput,
                 phoneError: '* not a valid Georgian phone number'
             })
         }
 
-        else if (userInput.firstName.length >= 2 && userInput.lastName.length >= 2 && userInput.phoneNumber.includes('+995')) { // if the above errors are not detected
-            setIsValid(true) // then our form is valid
-            setData({
-                ...data,
-                first_name: userInput.firstName,
-                last_name: userInput.lastName,
-                email: userInput.mail,
-                phone: userInput.phoneNumber,
-            })
+        else if (data.first_name.length >= 2 && data.last_name.length >= 2 && data.phone.includes('+995')) { // if the above errors are not detected
             navigate("/Skills") // and we can navigate to the next page
             
         }
@@ -98,16 +84,16 @@ function PersonalInfo({ data, setData }) {
                 <h1>Hey, Rocketeer, what are your coordinates?</h1>
 
                 <form onSubmit={(e) => validateForm(e)}>
-                    <input type="text" placeholder="First Name" onChange={(e) => handleFirst(e)} required />
+                    <input value={data.first_name} type="text" placeholder="First Name" onChange={(e) => handleFirst(e)} required />
                     <p className="validateError">{ userInput.firstError }</p>
 
-                    <input type="text" placeholder="Last Name" onChange={(e) => handleSecond(e)} required />
+                    <input value={data.last_name}  type="text" placeholder="Last Name" onChange={(e) => handleSecond(e)} required />
                     <p className="validateError">{ userInput.lastError }</p>
 
-                    <input type="email" placeholder="E Mail" required onChange={(e) => handleMail(e)} />
+                    <input value={data.email} type="email" placeholder="E Mail" required onChange={(e) => handleMail(e)} />
                     <p className="validateError">{ userInput.mailError }</p>
 
-                    <input type="tel" placeholder="+995 5__ __ __" onChange={(e) => handlePhone(e)} required />
+                    <input value={data.phone} type="tel" placeholder="+995 5__ __ __" onChange={(e) => handlePhone(e)} required />
                     <p className="validateError">{ userInput.phoneError }</p>
 
                     <nav>
