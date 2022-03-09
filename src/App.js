@@ -32,7 +32,7 @@ function App() {
   });
 
   return (
-    <Router>
+    <Router basename="/Reberry-app">
       <div className="App">
 
         <Routes>
