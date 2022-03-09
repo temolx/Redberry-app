@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Redberry-app/static/css/main.a10686b7.css",
-    "main.js": "/Redberry-app/static/js/main.e85b4950.js",
+    "main.js": "/Redberry-app/static/js/main.020d7588.js",
     "static/js/787.d1bb363e.chunk.js": "/Redberry-app/static/js/787.d1bb363e.chunk.js",
     "static/media/starsVideo.mp4": "/Redberry-app/static/media/starsVideo.66d241f9b2358c986a69.mp4",
     "static/media/rocketman.png": "/Redberry-app/static/media/rocketman.070342c38292e8abb51a.png",
     "index.html": "/Redberry-app/index.html",
     "main.a10686b7.css.map": "/Redberry-app/static/css/main.a10686b7.css.map",
-    "main.e85b4950.js.map": "/Redberry-app/static/js/main.e85b4950.js.map",
+    "main.020d7588.js.map": "/Redberry-app/static/js/main.020d7588.js.map",
     "787.d1bb363e.chunk.js.map": "/Redberry-app/static/js/787.d1bb363e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a10686b7.css",
-    "static/js/main.e85b4950.js"
+    "static/js/main.020d7588.js"
   ]
 }
